@@ -1,6 +1,6 @@
 <?php
 
-namespace EscolaLms\Translations\Http\Swagger;
+namespace EscolaLms\Translations\Http\Controllers\Swagger;
 
 use EscolaLms\Translations\Http\Requests\CreateLanguageLineRequest;
 use EscolaLms\Translations\Http\Requests\DeleteLanguageLineRequest;
@@ -103,16 +103,17 @@ interface TranslationAdminApiSwagger
     /**
      * @OA\Post(
      *      path="/api/admin/translations",
-     *      summary="Store a newly created Translation",
-     *      tags={"Admin Stationary Events"},
-     *      description="Store Translations",
+     *      summary="Store a newly created translation",
+     *      tags={"Admin Translations"},
+     *      description="Store translation",
      *      security={
      *          {"passport": {}},
      *      },
      *      @OA\RequestBody(
      *          required=true,
      *          @OA\MediaType(
-     *              mediaType="application/json"
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/language-line-save-request")
      *          ),
      *      ),
      *      @OA\Response(
@@ -141,9 +142,9 @@ interface TranslationAdminApiSwagger
     /**
      * @OA\Get(
      *      path="/api/admin/translations/{id}",
-     *      summary="Display the specified Translations",
+     *      summary="Display the specified translation",
      *      tags={"Admin Translations"},
-     *      description="Get Translations",
+     *      description="Get translation",
      *      security={
      *          {"passport": {}},
      *      },
@@ -160,7 +161,7 @@ interface TranslationAdminApiSwagger
      *          response=200,
      *          description="successful operation",
      *          @OA\MediaType(
-     *              mediaType="application/json"
+     *              mediaType="application/json",
      *          ),
      *          @OA\Schema(
      *              type="object",
@@ -181,15 +182,15 @@ interface TranslationAdminApiSwagger
     /**
      * @OA\Put(
      *      path="/api/admin/translations/{id}",
-     *      summary="Update the specified translations",
-     *      tags={"Admin Transalations"},
-     *      description="Update Translation",
+     *      summary="Update the specified translation",
+     *      tags={"Admin Translations"},
+     *      description="Update translation",
      *      security={
      *          {"passport": {}},
      *      },
      *      @OA\Parameter(
      *          name="id",
-     *          description="id of Translation",
+     *          description="id of translation",
      *          @OA\Schema(
      *             type="integer",
      *         ),
@@ -199,7 +200,8 @@ interface TranslationAdminApiSwagger
      *      @OA\RequestBody(
      *          required=true,
      *          @OA\MediaType(
-     *              mediaType="application/json"
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/language-line-save-request")
      *          ),
      *      ),
      *      @OA\Response(
@@ -267,4 +269,27 @@ interface TranslationAdminApiSwagger
      * )
      */
     public function delete(DeleteLanguageLineRequest $request): JsonResponse;
+
+    /**
+     * @OA\Schema(
+     *      schema="language-line-save-request",
+     *      required={"text"},
+     *      @OA\Property(
+     *          property="group",
+     *          description="group",
+     *          type="string"
+     *      ),
+     *      @OA\Property(
+     *          property="key",
+     *          description="key",
+     *          type="string"
+     *      ),
+     *      @OA\Property(
+     *          property="text",
+     *          description="text",
+     *          type="object"
+     *      ),
+     * )
+     *
+     */
 }

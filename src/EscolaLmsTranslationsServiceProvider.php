@@ -15,7 +15,6 @@ use Spatie\TranslationLoader\TranslationServiceProvider;
 /**
  * SWAGGER_VERSION
  */
-
 class EscolaLmsTranslationsServiceProvider extends ServiceProvider
 {
     const REPOSITORIES = [

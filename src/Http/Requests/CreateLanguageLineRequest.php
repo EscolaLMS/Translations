@@ -18,7 +18,7 @@ class CreateLanguageLineRequest extends FormRequest
         return [
             'group' => ['required', 'string', 'max:255'],
             'key' => ['required', 'string', 'max:255', 'unique:language_lines,key,NULL,id,group,' . $this->input('group')],
-            'text' => ['required', 'array'],
+            'text' => ['required', 'array', 'min:1'],
             'text.*' => ['required', 'string', 'max:255'],
         ];
     }

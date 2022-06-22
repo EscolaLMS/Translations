@@ -5,13 +5,13 @@ namespace EscolaLms\Translations\Http\Controllers;
 use EscolaLms\Core\Dtos\OrderDto;
 use EscolaLms\Core\Http\Controllers\EscolaLmsBaseController;
 use EscolaLms\Translations\Enum\ConstantEnum;
+use EscolaLms\Translations\Http\Controllers\Swagger\TranslationAdminApiSwagger;
 use EscolaLms\Translations\Http\Requests\CreateLanguageLineRequest;
 use EscolaLms\Translations\Http\Requests\DeleteLanguageLineRequest;
 use EscolaLms\Translations\Http\Requests\ListLanguageLineRequest;
 use EscolaLms\Translations\Http\Requests\ReadLanguageLineRequest;
 use EscolaLms\Translations\Http\Requests\UpdateLanguageLineRequest;
 use EscolaLms\Translations\Http\Resources\LanguageLineAdminResource;
-use EscolaLms\Translations\Http\Swagger\TranslationAdminApiSwagger;
 use EscolaLms\Translations\Services\Contracts\LanguageLineServiceContract;
 use Illuminate\Http\JsonResponse;
 

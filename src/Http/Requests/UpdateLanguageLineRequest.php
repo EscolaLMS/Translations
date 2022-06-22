@@ -30,6 +30,7 @@ class UpdateLanguageLineRequest extends FormRequest
             'text' => [
                 'sometimes',
                 'array',
+                'min:1',
             ],
             'text.*' => [
                 'sometimes',
