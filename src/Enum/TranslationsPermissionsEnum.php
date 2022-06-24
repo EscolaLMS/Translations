@@ -6,9 +6,9 @@ use EscolaLms\Core\Enums\BasicEnum;
 
 class TranslationsPermissionsEnum extends BasicEnum
 {
-    public const TRANSLATIONS_LIST = 'translations_list';
-    public const TRANSLATIONS_CREATE = 'translations_create';
-    public const TRANSLATIONS_READ = 'translations_read';
-    public const TRANSLATIONS_UPDATE = 'translations_update';
-    public const TRANSLATIONS_DELETE = 'translations_delete';
+    public const TRANSLATION_LIST = 'translation_list';
+    public const TRANSLATION_CREATE = 'translation_create';
+    public const TRANSLATION_READ = 'translation_read';
+    public const TRANSLATION_UPDATE = 'translation_update';
+    public const TRANSLATION_DELETE = 'translation_delete';
 }
