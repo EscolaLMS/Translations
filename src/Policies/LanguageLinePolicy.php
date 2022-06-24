@@ -13,26 +13,26 @@ class LanguageLinePolicy
 
     public function list(User $user): bool
     {
-        return $user->can(TranslationsPermissionsEnum::TRANSLATIONS_LIST);
+        return $user->can(TranslationsPermissionsEnum::TRANSLATION_LIST);
     }
 
     public function read(User $user, LanguageLine $languageLine): bool
     {
-        return $user->can(TranslationsPermissionsEnum::TRANSLATIONS_READ);
+        return $user->can(TranslationsPermissionsEnum::TRANSLATION_READ);
     }
 
     public function create(User $user): bool
     {
-        return $user->can(TranslationsPermissionsEnum::TRANSLATIONS_CREATE);
+        return $user->can(TranslationsPermissionsEnum::TRANSLATION_CREATE);
     }
 
     public function delete(User $user, LanguageLine $languageLine): bool
     {
-        return $user->can(TranslationsPermissionsEnum::TRANSLATIONS_DELETE);
+        return $user->can(TranslationsPermissionsEnum::TRANSLATION_DELETE);
     }
 
     public function update(User $user, LanguageLine $languageLine): bool
     {
-        return $user->can(TranslationsPermissionsEnum::TRANSLATIONS_UPDATE);
+        return $user->can(TranslationsPermissionsEnum::TRANSLATION_UPDATE);
     }
 }
