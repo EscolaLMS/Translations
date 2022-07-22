@@ -2,9 +2,9 @@
 
 namespace EscolaLms\Translations\Http\Requests;
 
+use EscolaLms\Translations\Models\LanguageLine;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
-use Spatie\TranslationLoader\LanguageLine;
 
 class CreateLanguageLineRequest extends FormRequest
 {
@@ -20,6 +20,7 @@ class CreateLanguageLineRequest extends FormRequest
             'key' => ['required', 'string', 'max:255', 'unique:language_lines,key,NULL,id,group,' . $this->input('group')],
             'text' => ['required', 'array', 'min:1'],
             'text.*' => ['required', 'string', 'max:255'],
+            'public' => ['boolean'],
         ];
     }
 }

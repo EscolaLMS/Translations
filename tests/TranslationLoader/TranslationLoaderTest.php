@@ -2,10 +2,10 @@
 
 namespace EscolaLms\Translations\Tests\TranslationLoader;
 
+use EscolaLms\Translations\Models\LanguageLine;
 use EscolaLms\Translations\Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\App;
-use Spatie\TranslationLoader\LanguageLine;
 
 class TranslationLoaderTest extends TestCase
 {

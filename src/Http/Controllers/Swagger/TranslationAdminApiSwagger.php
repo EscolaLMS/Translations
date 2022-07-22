@@ -74,6 +74,14 @@ interface TranslationAdminApiSwagger
      *              type="string"
      *          ),
      *      ),
+     *      @OA\Parameter(
+     *          name="public",
+     *          required=false,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="bool"
+     *          ),
+     *      ),
      *      @OA\Response(
      *          response=200,
      *          description="successful operation",

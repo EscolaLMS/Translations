@@ -3,11 +3,14 @@
 namespace EscolaLms\Translations\Services;
 
 use EscolaLms\Core\Dtos\OrderDto;
+use EscolaLms\Translations\Dto\PublicTranslationListCriteriaDto;
+use EscolaLms\Translations\Models\LanguageLine;
+use EscolaLms\Translations\Enum\ConstantEnum;
 use EscolaLms\Translations\Repositories\Contracts\LanguageLineRepositoryContract;
 use EscolaLms\Translations\Repositories\Criteria\OrderCriterion;
 use EscolaLms\Translations\Services\Contracts\LanguageLineServiceContract;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
-use Spatie\TranslationLoader\LanguageLine;
 
 class LanguageLineService implements LanguageLineServiceContract
 {
@@ -18,16 +21,19 @@ class LanguageLineService implements LanguageLineServiceContract
         $this->languageLineRepository = $lineRepository;
     }
 
-    public function getList(OrderDto $orderDto, array $search = [], bool $onlyActive = false): Builder
+    public function getList(OrderDto $orderDto, array $search = []): Builder
     {
-        $criteria = [];
-
-        if (!is_null($orderDto->getOrder())) {
-            $criteria[] = new OrderCriterion($orderDto->getOrderBy(), $orderDto->getOrder());
-        }
+        $criteria = $this->prepareCriteria($orderDto);
 
         return $this->languageLineRepository
             ->allQueryBuilder($search, $criteria);
+    }
+
+    public function getPublicLanguageLinesPaginatedList(PublicTranslationListCriteriaDto $searchDto, $perPage = ConstantEnum::PER_PAGE): LengthAwarePaginator
+    {
+        return $this->languageLineRepository
+            ->allQueryBuilder([], $searchDto->toArray())
+            ->paginate($perPage);
     }
 
     public function create(array $data): LanguageLine
@@ -43,5 +49,16 @@ class LanguageLineService implements LanguageLineServiceContract
     public function delete(LanguageLine $languageLine): bool
     {
         return $this->languageLineRepository->delete($languageLine->getKey()) ?? false;
+    }
+
+    private function prepareCriteria(OrderDto $orderDto): array
+    {
+        $criteria = [];
+
+        if (!is_null($orderDto->getOrder())) {
+            $criteria[] = new OrderCriterion($orderDto->getOrderBy(), $orderDto->getOrder());
+        }
+
+        return $criteria;
     }
 }

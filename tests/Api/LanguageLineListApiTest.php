@@ -4,9 +4,9 @@ namespace EscolaLms\Translations\Tests\Api;
 
 use EscolaLms\Core\Tests\CreatesUsers;
 use EscolaLms\Translations\Database\Seeders\TranslationsPermissionSeeder;
+use EscolaLms\Translations\Models\LanguageLine;
 use EscolaLms\Translations\Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Spatie\TranslationLoader\LanguageLine;
 
 class LanguageLineListApiTest extends TestCase
 {
@@ -25,12 +25,14 @@ class LanguageLineListApiTest extends TestCase
             'group' => 'auth',
             'key' => 'failed',
             'text' => ['en' => 'These credentials do not match our records', 'pl' => 'Błędny login lub hasło'],
+            'public' => false,
         ]);
 
         $this->validationLanguageLine = LanguageLine::create([
             'group' => 'validation',
             'key' => 'attributes.last_name',
             'text' => ['en' => 'last name', 'pl' => 'nazwisko'],
+            'public' => false,
         ]);
     }
 
@@ -72,5 +74,21 @@ class LanguageLineListApiTest extends TestCase
             ->assertJsonMissing([
                 'id' => $this->validationLanguageLine->getKey(),
             ]);
+    }
+
+    public function testLanguageLineListFilterByPublicField(): void
+    {
+        LanguageLine::factory()->count(5)->create(['public' => true]);
+        LanguageLine::factory()->count(8)->create(['public' => false]);
+
+        $this->actingAs($this->admin, 'api')
+            ->getJson('api/admin/translations?public=true')
+            ->assertJsonCount(5, 'data')
+            ->assertOk();
+
+        $this->actingAs($this->admin, 'api')
+            ->getJson('api/admin/translations?public=false')
+            ->assertJsonCount(10, 'data')
+            ->assertOk();
     }
 }
