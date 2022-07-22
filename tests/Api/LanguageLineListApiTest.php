@@ -82,12 +82,12 @@ class LanguageLineListApiTest extends TestCase
         LanguageLine::factory()->count(8)->create(['public' => false]);
 
         $this->actingAs($this->admin, 'api')
-            ->getJson('api/admin/translations?public=true')
+            ->getJson('api/admin/translations?public=1')
             ->assertJsonCount(5, 'data')
             ->assertOk();
 
         $this->actingAs($this->admin, 'api')
-            ->getJson('api/admin/translations?public=false')
+            ->getJson('api/admin/translations?public=0')
             ->assertJsonCount(10, 'data')
             ->assertOk();
     }

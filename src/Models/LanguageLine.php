@@ -10,6 +10,11 @@ class LanguageLine extends LanguageLineCore
 {
     use HasFactory;
 
+    protected $casts = [
+        'text' => 'array',
+        'public' => 'boolean'
+    ];
+
     protected static function newFactory(): LanguageLineFactory
     {
         return LanguageLineFactory::new();
