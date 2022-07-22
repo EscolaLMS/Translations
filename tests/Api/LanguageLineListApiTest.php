@@ -2,6 +2,7 @@
 
 namespace EscolaLms\Translations\Tests\Api;
 
+use Carbon\Carbon;
 use EscolaLms\Core\Tests\CreatesUsers;
 use EscolaLms\Translations\Database\Seeders\TranslationsPermissionSeeder;
 use EscolaLms\Translations\Models\LanguageLine;
@@ -90,5 +91,24 @@ class LanguageLineListApiTest extends TestCase
             ->getJson('api/admin/translations?public=0')
             ->assertJsonCount(10, 'data')
             ->assertOk();
+    }
+
+    public function testLanguageLineListOrderByPublicField(): void
+    {
+        $newest = LanguageLine::factory()->create(['created_at' => Carbon::now()->subDay()]);
+        $oldest = LanguageLine::factory()->create(['created_at' => Carbon::now()->addDay()]);
+        LanguageLine::factory()->count(5)->create();
+
+        $this->response = $this->actingAs($this->admin, 'api')
+            ->getJson('api/admin/translations?order_by=created_at&order=desc')
+            ->assertOk();
+
+        $this->assertEquals($newest->id, $this->response->getData()->data[0]->id);
+
+        $this->response = $this->actingAs($this->admin, 'api')
+            ->getJson('api/admin/translations?order_by=created_at&order=asc')
+            ->assertOk();
+
+        $this->assertEquals($oldest->id, $this->response->getData()->data[0]->id);
     }
 }
