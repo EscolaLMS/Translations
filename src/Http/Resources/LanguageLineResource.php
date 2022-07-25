@@ -4,7 +4,7 @@ namespace EscolaLms\Translations\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class LanguageLineAdminResource extends JsonResource
+class LanguageLineResource extends JsonResource
 {
     public function toArray($request): array
     {
@@ -12,10 +12,7 @@ class LanguageLineAdminResource extends JsonResource
             'id' => $this->id,
             'group' => $this->group,
             'key' => $this->key,
-            'text' => $this->text,
-            'public' => $this->public,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'text' => $this->text
         ];
     }
 }

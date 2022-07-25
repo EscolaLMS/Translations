@@ -2,9 +2,9 @@
 
 namespace EscolaLms\Translations\Http\Requests;
 
+use EscolaLms\Translations\Models\LanguageLine;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
-use Spatie\TranslationLoader\LanguageLine;
 
 class UpdateLanguageLineRequest extends FormRequest
 {
@@ -37,6 +37,7 @@ class UpdateLanguageLineRequest extends FormRequest
                 'string',
                 'max:255',
             ],
+            'public' => ['boolean'],
         ];
     }
 

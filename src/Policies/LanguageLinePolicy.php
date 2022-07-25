@@ -4,8 +4,8 @@ namespace EscolaLms\Translations\Policies;
 
 use EscolaLms\Auth\Models\User;
 use EscolaLms\Translations\Enum\TranslationsPermissionsEnum;
+use EscolaLms\Translations\Models\LanguageLine;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Spatie\TranslationLoader\LanguageLine;
 
 class LanguageLinePolicy
 {

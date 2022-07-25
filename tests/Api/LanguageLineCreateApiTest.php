@@ -3,10 +3,10 @@
 namespace EscolaLms\Translations\Tests\Api;
 
 use EscolaLms\Core\Tests\CreatesUsers;
+use EscolaLms\Translations\Models\LanguageLine;
 use EscolaLms\Translations\Database\Seeders\TranslationsPermissionSeeder;
 use EscolaLms\Translations\Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Spatie\TranslationLoader\LanguageLine;
 
 class LanguageLineCreateApiTest extends TestCase
 {

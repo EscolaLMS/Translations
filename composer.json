@@ -24,7 +24,8 @@
     "psr-4": {
       "EscolaLms\\Translations\\": "src",
       "EscolaLms\\Translations\\Tests\\": "tests",
-      "EscolaLms\\Translations\\Database\\Seeders\\": "database/seeders"
+      "EscolaLms\\Translations\\Database\\Seeders\\": "database/seeders",
+      "EscolaLms\\Translations\\Database\\Factories\\": "database/factories"
     }
   },
   "extra": {

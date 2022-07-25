@@ -3,8 +3,8 @@
 namespace EscolaLms\Translations\Repositories;
 
 use EscolaLms\Core\Repositories\BaseRepository;
+use EscolaLms\Translations\Models\LanguageLine;
 use EscolaLms\Translations\Repositories\Contracts\LanguageLineRepositoryContract;
-use Spatie\TranslationLoader\LanguageLine;
 use Illuminate\Database\Eloquent\Builder;
 
 class LanguageLineRepository extends BaseRepository implements LanguageLineRepositoryContract
@@ -12,6 +12,7 @@ class LanguageLineRepository extends BaseRepository implements LanguageLineRepos
     protected $fieldSearchable = [
         'group',
         'key',
+        'public'
     ];
 
     public function getFieldsSearchable(): array
