@@ -30,7 +30,6 @@ class MergeTranslationsOfPermissionsCommand extends Command
         $this->languages = Config::get('escolalms_translations.languages');
         $this->fileName = Config::get('escolalms_translations.permission_translation_file_name');
         $permissions = Permission::all()->pluck('name');
-
         $this->createEmptyLanguageFiles();
 
         foreach ($this->languages as $language) {

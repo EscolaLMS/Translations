@@ -35,7 +35,7 @@ class EscolaLmsTranslationsServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/routes.php');
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'escolalms_translations');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'translation');
         $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'escolalms_translations');
 
         if ($this->app->runningInConsole()) {
