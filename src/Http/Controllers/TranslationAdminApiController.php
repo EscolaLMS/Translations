@@ -10,18 +10,26 @@ use EscolaLms\Translations\Http\Requests\CreateLanguageLineRequest;
 use EscolaLms\Translations\Http\Requests\DeleteLanguageLineRequest;
 use EscolaLms\Translations\Http\Requests\ListLanguageLineRequest;
 use EscolaLms\Translations\Http\Requests\ReadLanguageLineRequest;
+use EscolaLms\Translations\Http\Requests\RetrieveTranslationRequest;
 use EscolaLms\Translations\Http\Requests\UpdateLanguageLineRequest;
 use EscolaLms\Translations\Http\Resources\LanguageLineAdminResource;
+use EscolaLms\Translations\Http\Resources\RetrieveTranslationResource;
 use EscolaLms\Translations\Services\Contracts\LanguageLineServiceContract;
+use EscolaLms\Translations\Services\Contracts\TranslationServiceContract;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Lang;
 
 class TranslationAdminApiController extends EscolaLmsBaseController implements TranslationAdminApiSwagger
 {
     private LanguageLineServiceContract $languageLineService;
+    private TranslationServiceContract $translationService;
 
-    public function __construct(LanguageLineServiceContract $languageLineService)
-    {
+    public function __construct(
+        LanguageLineServiceContract $languageLineService,
+        TranslationServiceContract $translationService
+    ) {
         $this->languageLineService = $languageLineService;
+        $this->translationService = $translationService;
     }
 
     public function index(ListLanguageLineRequest $request): JsonResponse
@@ -71,5 +79,15 @@ class TranslationAdminApiController extends EscolaLmsBaseController implements T
         }
 
         return $this->sendSuccess(__('Language line deleted successfully'));
+    }
+
+    public function translate(RetrieveTranslationRequest $request): JsonResponse
+    {
+        $result = $this->translationService->retrieve($request->getKey(), $request->getReplace());
+
+        return $this->sendResponseForResource(
+            RetrieveTranslationResource::collection($result),
+            __('Retrieve translation successfully')
+        );
     }
 }

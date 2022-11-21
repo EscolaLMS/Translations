@@ -6,6 +6,7 @@ use EscolaLms\Translations\Http\Requests\CreateLanguageLineRequest;
 use EscolaLms\Translations\Http\Requests\DeleteLanguageLineRequest;
 use EscolaLms\Translations\Http\Requests\ListLanguageLineRequest;
 use EscolaLms\Translations\Http\Requests\ReadLanguageLineRequest;
+use EscolaLms\Translations\Http\Requests\RetrieveTranslationRequest;
 use EscolaLms\Translations\Http\Requests\UpdateLanguageLineRequest;
 use Illuminate\Http\JsonResponse;
 
@@ -277,6 +278,44 @@ interface TranslationAdminApiSwagger
      * )
      */
     public function delete(DeleteLanguageLineRequest $request): JsonResponse;
+
+    /**
+     * @OA\Post(
+     *      path="/api/admin/translations/retrieve",
+     *      summary="Retrieve translation",
+     *      tags={"Admin Translations"},
+     *      description="Retrieve translation",
+     *      security={
+     *          {"passport": {}},
+     *      },
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(ref="#/components/schemas/retrieve-translation-request")
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=201,
+     *          description="successful operation",
+     *          @OA\MediaType(
+     *              mediaType="application/json"
+     *          ),
+     *          @OA\Schema(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function translate(RetrieveTranslationRequest $request): JsonResponse;
 
     /**
      * @OA\Schema(
