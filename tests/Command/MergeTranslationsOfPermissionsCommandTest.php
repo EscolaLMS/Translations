@@ -23,7 +23,7 @@ class MergeTranslationsOfPermissionsCommandTest extends TestCase
             $file = resource_path("lang/$langKey/permissions.php");
             $this->assertFileExists($file);
             $content = include $file;
-            $this->assertEqualsCanonicalizing($keys, array_keys($content));
+            $this->assertEqualsCanonicalizing(array_intersect($keys, array_keys($content)), $keys);
         }
     }
 }
