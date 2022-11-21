@@ -10,6 +10,7 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'api/admin/translations'
     Route::put('{id}', [TranslationAdminApiController::class, 'update']);
     Route::get('{id}', [TranslationAdminApiController::class, 'show']);
     Route::delete('{id}', [TranslationAdminApiController::class, 'delete']);
+    Route::post('retrieve', [TranslationAdminApiController::class, 'translate']);
 });
 
 Route::group(['prefix' => 'api/translations'], function () {

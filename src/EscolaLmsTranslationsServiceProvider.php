@@ -8,7 +8,9 @@ use EscolaLms\Translations\Providers\AuthServiceProvider;
 use EscolaLms\Translations\Repositories\Contracts\LanguageLineRepositoryContract;
 use EscolaLms\Translations\Repositories\LanguageLineRepository;
 use EscolaLms\Translations\Services\Contracts\LanguageLineServiceContract;
+use EscolaLms\Translations\Services\Contracts\TranslationServiceContract;
 use EscolaLms\Translations\Services\LanguageLineService;
+use EscolaLms\Translations\Services\TranslationService;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\ServiceProvider;
 use Spatie\TranslationLoader\TranslationServiceProvider;
@@ -24,6 +26,7 @@ class EscolaLmsTranslationsServiceProvider extends ServiceProvider
 
     const SERVICES = [
         LanguageLineServiceContract::class => LanguageLineService::class,
+        TranslationServiceContract::class => TranslationService::class,
     ];
 
     public $singletons = self::SERVICES + self::REPOSITORIES;

@@ -4,10 +4,8 @@ namespace EscolaLms\Translations\Console\Command;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
-use Spatie\Permission\Models\Permission;
 
 class MergeTranslationsOfPermissionsCommand extends Command
 {
@@ -29,12 +27,11 @@ class MergeTranslationsOfPermissionsCommand extends Command
         $this->path = Config::get('escolalms_translations.lang_path');
         $this->languages = Config::get('escolalms_translations.languages');
         $this->fileName = Config::get('escolalms_translations.permission_translation_file_name');
-        $permissions = Permission::all()->pluck('name');
         $this->createEmptyLanguageFiles();
 
         foreach ($this->languages as $language) {
             $file = "$this->path/$language/$this->fileName.php";
-            $content = $this->buildFileContent($file, $language, $permissions);
+            $content = $this->buildFileContent($file, $language);
             $this->writeFile($file, $content);
         }
     }
@@ -76,14 +73,15 @@ class MergeTranslationsOfPermissionsCommand extends Command
         return $output;
     }
 
-    private function buildFileContent(string $file, string $language, Collection $permissions): array
+    private function buildFileContent(string $file, string $language): array
     {
+        $namespaces = array_keys(Lang::getLoader()->namespaces());
         $content = include $file;
-        foreach ($permissions as $permissionName) {
-            $package = explode('_', $permissionName)[0];
 
-            if (Lang::has("$package::permissions.$permissionName", $language)) {
-                $content[$permissionName] = Lang::get("$package::permissions.$permissionName", [], $language);
+        foreach ($namespaces as $namespace) {
+            $trans = Lang::get("$namespace::permissions", [], $language);
+            if (is_array($trans)) {
+                $content = array_merge($content, $trans);
             }
         }
 
