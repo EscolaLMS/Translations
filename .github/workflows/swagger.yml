@@ -1,10 +1,6 @@
 name: Generate Swagger Documentation
 
-on:
-  push:
-    branches:
-      - main
-      - master
+on: push
 
 jobs:
   swagger-gh-pages:
@@ -12,24 +8,9 @@ jobs:
     container:
       image: escolalms/php:8.2
 
-    services:
-      mysql:
-        image: mariadb
-        env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: database
-          MYSQL_PASSWORD: password
-          MYSQL_USER: username
-        ports:
-          - 33306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-
     steps:
       - name: Instantiate package
         uses: actions/checkout@v2
-
-      - name: Setup environment
-        run: cp env/mysql/* .
 
       - name: Setup environment
         run: cp -r env/codecov/. .
@@ -38,7 +19,7 @@ jobs:
         run: php -r "file_put_contents('src/EscolaLmsTranslationsServiceProvider.php', str_replace('SWAGGER_VERSION', '@OA\Info(title=\"EscolaLMS\", version=\"0.0.1\")', file_get_contents('src/EscolaLmsTranslationsServiceProvider.php')));"
 
       - name: Update composer
-        run: composer update
+        run: composer update --no-script
 
       - name: Require composer swagger package
         run: composer require darkaonline/l5-swagger:8.1.0
