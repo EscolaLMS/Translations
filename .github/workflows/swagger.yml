@@ -1,10 +1,10 @@
 name: Generate Swagger Documentation
 
-on:
-  push:
-    branches:
-      - main
-      - master
+#on:
+#  push:
+#    branches:
+#      - main
+#      - master
 
 jobs:
   swagger-gh-pages:
