@@ -1,6 +1,10 @@
 name: Generate Swagger Documentation
 
-on: push
+on:
+  push:
+    branches:
+      - main
+      - master
 
 jobs:
   swagger-gh-pages:
