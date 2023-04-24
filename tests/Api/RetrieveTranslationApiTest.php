@@ -4,12 +4,13 @@ namespace EscolaLms\Translations\Tests\Api;
 
 use EscolaLms\Core\Tests\CreatesUsers;
 use EscolaLms\Translations\Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Testing\Fluent\AssertableJson;
 
 class RetrieveTranslationApiTest extends TestCase
 {
-    use CreatesUsers;
+    use DatabaseTransactions, CreatesUsers;
 
     public function testRetrieveTranslationUnauthorized(): void
     {

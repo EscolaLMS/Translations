@@ -8,12 +8,15 @@ use EscolaLms\Auth\Tests\Models\Client;
 use EscolaLms\Core\Tests\TestCase as CoreTestCase;
 use EscolaLms\Translations\Database\Seeders\TranslationsPermissionSeeder;
 use EscolaLms\Translations\EscolaLmsTranslationsServiceProvider;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Testing\TestResponse;
 use Laravel\Passport\Passport;
 use Spatie\TranslationLoader\TranslationServiceProvider;
 
 class TestCase extends CoreTestCase
 {
+    use DatabaseTransactions;
+
     protected ?TestResponse $response;
 
     protected function setUp(): void
