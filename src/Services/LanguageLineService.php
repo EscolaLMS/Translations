@@ -11,6 +11,7 @@ use EscolaLms\Translations\Repositories\Criteria\OrderCriterion;
 use EscolaLms\Translations\Services\Contracts\LanguageLineServiceContract;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 
 class LanguageLineService implements LanguageLineServiceContract
 {
@@ -29,11 +30,11 @@ class LanguageLineService implements LanguageLineServiceContract
             ->allQueryBuilder($search, $criteria);
     }
 
-    public function getPublicLanguageLinesPaginatedList(PublicTranslationListCriteriaDto $searchDto, $perPage = ConstantEnum::PER_PAGE): LengthAwarePaginator
+    public function getPublicLanguageLinesPaginatedList(PublicTranslationListCriteriaDto $searchDto, $perPage = ConstantEnum::PER_PAGE): LengthAwarePaginator|Collection
     {
-        return $this->languageLineRepository
-            ->allQueryBuilder([], $searchDto->toArray())
-            ->paginate($perPage);
+        $result = $this->languageLineRepository
+            ->allQueryBuilder([], $searchDto->toArray());
+        return $perPage <= 0 ? $result->get() : $result->paginate($perPage);
     }
 
     public function create(array $data): LanguageLine

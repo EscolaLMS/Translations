@@ -54,6 +54,38 @@ class LanguageLineListApiTest extends TestCase
             ]);
     }
 
+    public function testLanguageLineListReadonly(): void
+    {
+        $tutor = $this->makeInstructor();
+        $this->actingAs($tutor, 'api')->json('GET', 'api/admin/translations')
+            ->assertOk()
+            ->assertJsonFragment([
+                'id' => $this->authLanguageLine->getKey(),
+            ])
+            ->assertJsonFragment([
+                'id' => $this->validationLanguageLine->getKey(),
+            ])
+            ->assertJsonFragment([
+                'current_page' => 1,
+            ]);
+    }
+
+    public function testLanguageLineListAll(): void
+    {
+        $tutor = $this->makeInstructor();
+        $this->actingAs($tutor, 'api')->json('GET', 'api/admin/translations', ['per_page' => -1])
+            ->assertOk()
+            ->assertJsonFragment([
+                'id' => $this->authLanguageLine->getKey(),
+            ])
+            ->assertJsonFragment([
+                'id' => $this->validationLanguageLine->getKey(),
+            ])
+            ->assertJsonMissing([
+                'current_page' => 1,
+            ]);
+    }
+
     public function testLanguageLineListFilter(): void
     {
         $this->actingAs($this->admin, 'api')
