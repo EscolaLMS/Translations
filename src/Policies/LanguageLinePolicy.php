@@ -13,7 +13,8 @@ class LanguageLinePolicy
 
     public function list(User $user): bool
     {
-        return $user->can(TranslationsPermissionsEnum::TRANSLATION_LIST);
+        return $user->can(TranslationsPermissionsEnum::TRANSLATION_LIST)
+            || $user->can(TranslationsPermissionsEnum::TRANSLATION_LIST_READONLY);
     }
 
     public function read(User $user, LanguageLine $languageLine): bool

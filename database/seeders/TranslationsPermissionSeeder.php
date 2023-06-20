@@ -18,5 +18,7 @@ class TranslationsPermissionSeeder extends Seeder
 
         $admin = Role::findOrCreate(UserRole::ADMIN, 'api');
         $admin->givePermissionTo(TranslationsPermissionsEnum::getValues());
+        $tutor = Role::findOrCreate(UserRole::TUTOR, 'api');
+        $tutor->givePermissionTo(TranslationsPermissionsEnum::TRANSLATION_LIST_READONLY);
     }
 }

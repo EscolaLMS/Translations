@@ -37,12 +37,12 @@ class TranslationAdminApiController extends EscolaLmsBaseController implements T
         $search = $request->except(['limit', 'skip', 'order', 'order_by']);
         $orderDto = OrderDto::instantiateFromRequest($request);
 
+        $perPage = $request->get('per_page') ?? ConstantEnum::PER_PAGE;
         $languageLines = $this->languageLineService
-            ->getList($orderDto, $search)
-            ->paginate($request->get('per_page') ?? ConstantEnum::PER_PAGE);
+            ->getList($orderDto, $search);
 
         return $this->sendResponseForResource(
-            LanguageLineAdminResource::collection($languageLines),
+            LanguageLineAdminResource::collection($perPage <= 0 ? $languageLines->get() : $languageLines->paginate($perPage)),
             __('Language lines retrieved successfully')
         );
     }
