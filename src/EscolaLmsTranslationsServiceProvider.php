@@ -39,7 +39,7 @@ class EscolaLmsTranslationsServiceProvider extends ServiceProvider
 
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'translation');
         $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'escolalms_translations');
-        $this->mergeConfigFrom(__DIR__ . '/../config/translation-loader.php', 'escolalms_translations_translation_loader');
+        $this->mergeConfigFrom(__DIR__ . '/../config/translation-loader.php', 'translation-loader');
 
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
@@ -60,7 +60,7 @@ class EscolaLmsTranslationsServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__ . '/../config/config.php' => config_path('escolalms_translations.php'),
-            __DIR__ . '/../config/translation-loader.php' => config_path('escolalms_translations_translation_loader.php'),
+            __DIR__ . '/../config/translation-loader.php' => config_path('translation-loader.php'),
         ], 'escolalms_translations');
     }
 }
