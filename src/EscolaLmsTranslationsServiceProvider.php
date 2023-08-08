@@ -34,12 +34,12 @@ class EscolaLmsTranslationsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app->make(Kernel::class)->pushMiddleware(AcceptLanguage::class);
-
         $this->loadRoutesFrom(__DIR__ . '/routes.php');
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'translation');
         $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'escolalms_translations');
+        $this->mergeConfigFrom(__DIR__ . '/../config/translation-loader.php', 'translation-loader');
 
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
@@ -60,6 +60,7 @@ class EscolaLmsTranslationsServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__ . '/../config/config.php' => config_path('escolalms_translations.php'),
+            __DIR__ . '/../config/translation-loader.php' => config_path('translation-loader.php'),
         ], 'escolalms_translations');
     }
 }

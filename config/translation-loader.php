@@ -19,6 +19,5 @@ return [
     /*
      * This is the translation manager which overrides the default Laravel `translation.loader`
      */
-    'translation_manager' => Spatie\TranslationLoader\TranslationLoaderManager::class,
-
+    'translation_manager' => EscolaLms\Translations\Translations\TranslationLoaderManager::class,
 ];
