@@ -45,7 +45,7 @@ class MergeTranslationsOfPermissionsCommand extends Command
 
             if (!$this->disk->exists($fullPath)) {
                 if (!$this->disk->exists($directoryPath)) {
-                    $this->disk->makeDirectory($directoryPath);
+                    $this->disk->makeDirectory($directoryPath, 0755, true);
                 }
                 $this->writeFile($fullPath);
             }
