@@ -3,7 +3,7 @@
   "description": "Escola Headless LMS Translations",
   "type": "package",
   "require": {
-    "php": ">=7.4 | >=8.0",
+    "php": ">=8.0",
     "escolalms/auth": "^0",
     "escolalms/core": "^1",
     "laravel/framework": ">=8.0",
