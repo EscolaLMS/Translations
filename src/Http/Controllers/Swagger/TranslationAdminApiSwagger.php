@@ -314,10 +314,8 @@ interface TranslationAdminApiSwagger
      *          )
      *      )
      * )
-     */
-    public function translate(RetrieveTranslationRequest $request): JsonResponse;
-
-    /**
+     *
+     *
      * @OA\Schema(
      *      schema="language-line-save-request",
      *      required={"text"},
@@ -339,4 +337,5 @@ interface TranslationAdminApiSwagger
      * )
      *
      */
+    public function translate(RetrieveTranslationRequest $request): JsonResponse;
 }
