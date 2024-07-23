@@ -54,7 +54,7 @@ class LanguageLineService implements LanguageLineServiceContract
      */
     public function create(array $data): LanguageLine
     {
-        /** @var LanguageLine $result */
+        /** @var LanguageLine $model */
         $model = $this->languageLineRepository->create($data);
         return $model;
     }
