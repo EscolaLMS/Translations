@@ -3,6 +3,7 @@
 namespace EscolaLms\Translations\Services;
 
 use EscolaLms\Core\Dtos\OrderDto;
+use EscolaLms\Core\Repositories\Criteria\Criterion;
 use EscolaLms\Translations\Dto\PublicTranslationListCriteriaDto;
 use EscolaLms\Translations\Models\LanguageLine;
 use EscolaLms\Translations\Enum\ConstantEnum;
@@ -22,6 +23,11 @@ class LanguageLineService implements LanguageLineServiceContract
         $this->languageLineRepository = $lineRepository;
     }
 
+    /**
+     * @param OrderDto $orderDto
+     * @param array<string, mixed> $search
+     * @return Builder<LanguageLine>
+     */
     public function getList(OrderDto $orderDto, array $search = []): Builder
     {
         $criteria = $this->prepareCriteria($orderDto);
@@ -30,18 +36,32 @@ class LanguageLineService implements LanguageLineServiceContract
             ->allQueryBuilder($search, $criteria);
     }
 
-    public function getPublicLanguageLinesPaginatedList(PublicTranslationListCriteriaDto $searchDto, $perPage = ConstantEnum::PER_PAGE): LengthAwarePaginator|Collection
+    /**
+     * @param PublicTranslationListCriteriaDto $searchDto
+     * @param int $perPage
+     * @return LengthAwarePaginator<LanguageLine>|Collection<int, LanguageLine>
+     */
+    public function getPublicLanguageLinesPaginatedList(PublicTranslationListCriteriaDto $searchDto, int $perPage = ConstantEnum::PER_PAGE): LengthAwarePaginator|Collection
     {
         $result = $this->languageLineRepository
             ->allQueryBuilder([], $searchDto->toArray());
         return $perPage <= 0 ? $result->get() : $result->paginate($perPage);
     }
 
+    /**
+     * @param array<string, mixed> $data
+     * @return LanguageLine
+     */
     public function create(array $data): LanguageLine
     {
         return $this->languageLineRepository->create($data);
     }
 
+    /**
+     * @param LanguageLine $languageLine
+     * @param array<string, mixed> $data
+     * @return LanguageLine
+     */
     public function update(LanguageLine $languageLine, array $data): LanguageLine
     {
         return $this->languageLineRepository->update($data, $languageLine->getKey());
@@ -52,6 +72,10 @@ class LanguageLineService implements LanguageLineServiceContract
         return $this->languageLineRepository->delete($languageLine->getKey()) ?? false;
     }
 
+    /**
+     * @param OrderDto $orderDto
+     * @return array<int, Criterion>
+     */
     private function prepareCriteria(OrderDto $orderDto): array
     {
         $criteria = [];

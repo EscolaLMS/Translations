@@ -12,9 +12,31 @@ use Illuminate\Support\Collection;
 
 interface LanguageLineServiceContract
 {
+    /**
+     * @param OrderDto $orderDto
+     * @param array<string, mixed> $search
+     * @return Builder<LanguageLine>
+     */
     public function getList(OrderDto $orderDto, array $search = []): Builder;
-    public function getPublicLanguageLinesPaginatedList(PublicTranslationListCriteriaDto $dto, $perPage = ConstantEnum::PER_PAGE): LengthAwarePaginator|Collection;
+
+    /**
+     * @param PublicTranslationListCriteriaDto $searchDto
+     * @param int $perPage
+     * @return LengthAwarePaginator<LanguageLine>|Collection<int, LanguageLine>
+     */
+    public function getPublicLanguageLinesPaginatedList(PublicTranslationListCriteriaDto $searchDto, int $perPage = ConstantEnum::PER_PAGE): LengthAwarePaginator|Collection;
+
+    /**
+     * @param array<string, mixed> $data
+     * @return LanguageLine
+     */
     public function create(array $data): LanguageLine;
+
+    /**
+     * @param LanguageLine $languageLine
+     * @param array<string, mixed> $data
+     * @return LanguageLine
+     */
     public function update(LanguageLine $languageLine, array $data): LanguageLine;
     public function delete(LanguageLine $languageLine): bool;
 }

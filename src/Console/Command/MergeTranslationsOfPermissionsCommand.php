@@ -17,6 +17,9 @@ class MergeTranslationsOfPermissionsCommand extends Command
 
     private string $path;
 
+    /**
+     * @var array<int, string>
+     */
     private array $languages;
 
     private string $fileName;
@@ -52,6 +55,11 @@ class MergeTranslationsOfPermissionsCommand extends Command
         }
     }
 
+    /**
+     * @param string $filePath
+     * @param array<string, string> $content
+     * @return void
+     */
     private function writeFile(string $filePath, array $content = []): void
     {
         $output = "<?php \n\n";
@@ -61,6 +69,10 @@ class MergeTranslationsOfPermissionsCommand extends Command
         file_put_contents($filePath, $output);
     }
 
+    /**
+     * @param array<string, string> $content
+     * @return string
+     */
     private function buildStringExpression(array $content): string
     {
         $output = '';
@@ -73,6 +85,11 @@ class MergeTranslationsOfPermissionsCommand extends Command
         return $output;
     }
 
+    /**
+     * @param string $file
+     * @param string $language
+     * @return array<string, string>
+     */
     private function buildFileContent(string $file, string $language): array
     {
         $namespaces = array_keys(Lang::getLoader()->namespaces());
