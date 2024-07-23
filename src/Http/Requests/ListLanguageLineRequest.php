@@ -13,6 +13,9 @@ class ListLanguageLineRequest extends FormRequest
         return Gate::allows('list', LanguageLine::class);
     }
 
+    /**
+     * @return array<string, array<int, string>>
+     */
     public function rules(): array
     {
         return [];

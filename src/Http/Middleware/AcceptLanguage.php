@@ -9,8 +9,9 @@ use Illuminate\Support\Facades\Config;
 
 class AcceptLanguage
 {
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): mixed
     {
+        // @phpstan-ignore-next-line
         App::setLocale($request->header('X-Locale', Config::get('app.locale')));
 
         return $next($request);

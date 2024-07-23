@@ -10,6 +10,9 @@ class LanguageLine extends LanguageLineCore
 {
     use HasFactory;
 
+    /**
+     * @var array<string, string>
+     */
     protected $casts = [
         'text' => 'array',
         'public' => 'boolean'

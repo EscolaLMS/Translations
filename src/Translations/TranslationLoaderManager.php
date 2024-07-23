@@ -10,6 +10,9 @@ use Spatie\TranslationLoader\TranslationLoaderManager as TranslationLoaderManage
 
 class TranslationLoaderManager extends TranslationLoaderManagerCore
 {
+    /**
+     * @return array <string, string>
+     */
     public function load($locale, $group, $namespace = null): array
     {
         //Locale sent in header is in format xx-YY, but the folder name is in format xx

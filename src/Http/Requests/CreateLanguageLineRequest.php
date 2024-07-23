@@ -13,6 +13,9 @@ class CreateLanguageLineRequest extends FormRequest
         return Gate::allows('create', LanguageLine::class);
     }
 
+    /**
+     * @return array<string, array<int, string>>
+     */
     public function rules(): array
     {
         return [

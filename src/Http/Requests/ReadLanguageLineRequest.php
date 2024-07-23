@@ -13,6 +13,9 @@ class ReadLanguageLineRequest extends FormRequest
         return Gate::allows('read', $this->getLanguageLine());
     }
 
+    /**
+     * @return array<string, array<int, string>>
+     */
     public function rules(): array
     {
         return [];

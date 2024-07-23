@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
         LanguageLine::class => LanguageLinePolicy::class,
     ];
 
-    public function boot()
+    public function boot(): void
     {
         $this->registerPolicies();
 

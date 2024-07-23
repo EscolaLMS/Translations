@@ -29,9 +29,12 @@ class EscolaLmsTranslationsServiceProvider extends ServiceProvider
         TranslationServiceContract::class => TranslationService::class,
     ];
 
-    public $singletons = self::SERVICES + self::REPOSITORIES;
+    /**
+     * @var array<class-string, class-string>
+     */
+    public array $singletons = self::SERVICES + self::REPOSITORIES;
 
-    public function boot()
+    public function boot(): void
     {
         $this->app->make(Kernel::class)->pushMiddleware(AcceptLanguage::class);
         $this->loadRoutesFrom(__DIR__ . '/routes.php');
@@ -46,7 +49,7 @@ class EscolaLmsTranslationsServiceProvider extends ServiceProvider
         }
     }
 
-    public function register()
+    public function register(): void
     {
         $this->app->register(AuthServiceProvider::class);
         $this->app->register(TranslationServiceProvider::class);
