@@ -13,6 +13,9 @@ class UpdateLanguageLineRequest extends FormRequest
         return Gate::allows('update', $this->getLanguageLine());
     }
 
+    /**
+     * @return array<string, array<int, string>>
+     */
     public function rules(): array
     {
         return [

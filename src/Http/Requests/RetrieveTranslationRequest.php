@@ -24,6 +24,9 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class RetrieveTranslationRequest extends FormRequest
 {
+    /**
+     * @return array<string, array<int, string>>
+     */
     public function rules(): array
     {
         return [
@@ -37,6 +40,9 @@ class RetrieveTranslationRequest extends FormRequest
         return $this->get('key');
     }
 
+    /**
+     * @return array<string, string>
+     */
     public function getReplace(): array
     {
         return $this->get('replace', []);

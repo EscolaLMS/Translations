@@ -6,13 +6,16 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class LanguageLineResource extends JsonResource
 {
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray($request): array
     {
         return [
-            'id' => $this->id,
-            'group' => $this->group,
-            'key' => $this->key,
-            'text' => $this->text
+            'id' => $this->resource->id,
+            'group' => $this->resource->group,
+            'key' => $this->resource->key,
+            'text' => $this->resource->text
         ];
     }
 }

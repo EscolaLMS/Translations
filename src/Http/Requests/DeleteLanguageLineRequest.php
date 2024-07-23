@@ -13,6 +13,9 @@ class DeleteLanguageLineRequest extends FormRequest
         return Gate::allows('delete', $this->getLanguageLine());
     }
 
+    /**
+     * @return array<string, array<int, string>>
+     */
     public function rules(): array
     {
         return [];

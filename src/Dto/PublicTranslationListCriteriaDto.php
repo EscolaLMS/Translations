@@ -33,6 +33,6 @@ class PublicTranslationListCriteriaDto extends CriteriaDto implements DtoContrac
             $criteria->push(new InCriterion('group', $request->get('group')));
         }
 
-        return new static($criteria);
+        return new self($criteria);
     }
 }

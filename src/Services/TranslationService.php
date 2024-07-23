@@ -8,6 +8,11 @@ use Illuminate\Support\Arr;
 
 class TranslationService implements TranslationServiceContract
 {
+    /**
+     * @param string $key
+     * @param array<string, string> $replace
+     * @return array<int, TranslationDto>
+     */
     public function retrieve(string $key, array $replace): array
     {
         $result = [];
