@@ -54,7 +54,9 @@ class LanguageLineService implements LanguageLineServiceContract
      */
     public function create(array $data): LanguageLine
     {
-        return $this->languageLineRepository->create($data);
+        /** @var LanguageLine $result */
+        $model = $this->languageLineRepository->create($data);
+        return $model;
     }
 
     /**
@@ -64,7 +66,9 @@ class LanguageLineService implements LanguageLineServiceContract
      */
     public function update(LanguageLine $languageLine, array $data): LanguageLine
     {
-        return $this->languageLineRepository->update($data, $languageLine->getKey());
+        /** @var LanguageLine $model */
+        $model = $this->languageLineRepository->update($data, $languageLine->getKey());
+        return $model;
     }
 
     public function delete(LanguageLine $languageLine): bool
