@@ -391,5 +391,15 @@
                 "type": "object"
             }
         }
-    }
+    },
+    "tags": [
+        {
+            "name": "Admin Translations",
+            "description": "Admin Translations"
+        },
+        {
+            "name": "Translations",
+            "description": "Translations"
+        }
+    ]
 }
